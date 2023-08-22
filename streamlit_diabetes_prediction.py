@@ -41,10 +41,10 @@ diabetes_diagnosis = ''
 if st.button('Diabetes Prediction Test'):
   diabetes_prediction = model_diabetes.predict([[Pregnancies,Glucose,Blood_Pressure,Skin_Thickness,Insulin,BMI,Diabetes_Pedigree_Function,Age]])
   
-  if(diabetes_prediction[0]==0):
-    diabetes_diagnosis = 'The patient does not have diabetes'
-  else :
+  if(diabetes_prediction[0]==1):
     diabetes_diagnosis = 'The patient has diabetes'
+  else :
+    diabetes_diagnosis = 'The patient does not have diabetes'
 
 st.success(diabetes_diagnosis)
 
