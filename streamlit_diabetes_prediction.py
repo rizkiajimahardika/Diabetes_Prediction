@@ -40,7 +40,7 @@ with col2 :
 diabetes_diagnosis = ''
 
 if st.button('Diabetes Prediction Test'):
-  diabetes_prediction = model_diabetes.predict(np.array([[Pregnancies,Glucose,BloodPressure,SkinThickness,Insulin,BMI,DiabetesPedigreeFunction,Age]]).reshape(1,-1))
+  diabetes_prediction = model_diabetes.predict(float([[Pregnancies,Glucose,BloodPressure,SkinThickness,Insulin,BMI,DiabetesPedigreeFunction,Age]]))
   
   if(diabetes_prediction[0]==1):
     diabetes_diagnosis = 'The patient has diabetes'
