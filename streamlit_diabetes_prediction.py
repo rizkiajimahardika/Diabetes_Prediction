@@ -1,6 +1,7 @@
 # importing Important Liberaries
 import pickle
 import streamlit as st
+import numpy as np
 
 # Load model
 model_diabetes = pickle.load(open('model_diabetes.sav', 'rb'))
