@@ -5,7 +5,6 @@ import seaborn as sns
 
 # Load data
 data = pd.read_csv('diabetes.csv')
-data
 
 # Shape check
 data.shape
