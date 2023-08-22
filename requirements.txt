@@ -3,4 +3,4 @@ numpy==1.23.5
 seaborn==0.12.2
 streamlit
 pip==23.1.2
-scikit-learn==1.2.2
+scikit-learn
