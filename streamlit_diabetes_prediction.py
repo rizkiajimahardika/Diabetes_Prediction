@@ -3,11 +3,8 @@ import pandas as pd
 import numpy as np
 import seaborn as sns
 
-# Loading data
-from google.colab import drive
-
-drive.mount('/content/gdrive')
-data = pd.read_csv('gdrive//My Drive/PMSI 6B Kel 2 P2/diabetes.csv')
+# Load data
+data = pd.read_csv('diabetes.csv')
 data
 
 # Shape check
