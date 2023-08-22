@@ -18,10 +18,10 @@ with col2 :
   Glucose = st.text_input('Enter the Glucose value')
   
 with col1 :
-  Blood_Pressure = st.text_input('Enter the Blood Pressure value')
+  BloodPressure = st.text_input('Enter the Blood Pressure value')
 
 with col2 :
-  Skin_Thickness = st.text_input('Enter the Skin Thickness value')
+  SkinThickness = st.text_input('Enter the Skin Thickness value')
 
 with col1 :
   Insulin = st.text_input('Enter the Insulin value')
@@ -30,7 +30,7 @@ with col2 :
   BMI = st.text_input('Enter the BMI value')
 
 with col1 :
-  Diabetes_Pedigree_Function = st.text_input('Enter the Diabetes Pedigree Function value')
+  DiabetesPedigreeFunction = st.text_input('Enter the Diabetes Pedigree Function value')
 
 with col2 :
   Age = st.text_input('Enter the Age value')
@@ -39,7 +39,7 @@ with col2 :
 diabetes_diagnosis = ''
 
 if st.button('Diabetes Prediction Test'):
-  diabetes_prediction = model_diabetes.predict([[Pregnancies,Glucose,Blood_Pressure,Skin_Thickness,Insulin,BMI,Diabetes_Pedigree_Function,Age]])
+  diabetes_prediction = model_diabetes.predict([[Pregnancies,Glucose,BloodPressure,SkinThickness,Insulin,BMI,DiabetesPedigreeFunction,Age]])
   
   if(diabetes_prediction[0]==1):
     diabetes_diagnosis = 'The patient has diabetes'
