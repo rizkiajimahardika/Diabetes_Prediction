@@ -1,74 +1,50 @@
 # importing Important Liberaries
-import pandas as pd
-import numpy as np
-import seaborn as sns
-
-# Load data
-data = pd.read_csv('diabetes.csv')
-
-# Shape check
-data.shape
-
-# Check info data
-data.info()
-
-# Statistics Summary
-data.describe()
-
-# Check Missing Values
-data.isna().sum()
-
-# Correlation Matrix
-sns.heatmap(data.corr(),annot = True, cmap = 'crest')
-
-# Visualizations
-sns.pairplot(data, hue="Outcome", palette="viridis");
-
-"""# Modeling"""
-
-features = ['Pregnancies', 'Glucose', 'BloodPressure', 'SkinThickness', 'Insulin','BMI', 'DiabetesPedigreeFunction', 'Age']
-x = pd.get_dummies(data[features])
-
-# Target
-y = data['Outcome']
-
-# Split data
-from sklearn.model_selection import train_test_split
-x_train, x_test, y_train, y_test = train_test_split(x,y,test_size = 1/11, random_state = 242)
-
-# Fitting model
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
-from sklearn.linear_model import LogisticRegression
-
-
-model = LogisticRegression()
-model.fit(x_train, y_train)
-
-y_pred = model.predict(x_test)
-
-# Evaluate the model
-accuracy = accuracy_score(y_test, y_pred)
-precision = precision_score(y_test, y_pred)
-recall = recall_score(y_test, y_pred)
-f1 = f1_score(y_test, y_pred)
-
-print("Accuracy:", accuracy)
-print("Precision:", precision)
-print("Recall:", recall)
-print("F1 Score:", f1)
-
-data_input = (6,148,72,35,0,33.6,0.627,50)
-data_input_array = np.array(data_input)
-data_input_reshape = data_input_array.reshape(1, -1)
-
-prediction = model.predict(data_input_reshape)
-print(prediction)
-
-if(prediction[0] == 0):
-  print('Pasien tidak terkena diabetes')
-else:
-  print('Pasien terkena diabetes')
-
 import pickle
-filename = 'model_diabetes.sav'
-pickle.dump(model, open(filename, 'wb'))
+import streamlit as st
+
+# Load model
+model_diabetes = pickle.load(open('model_diabetes.sav', 'rb'))
+
+# Web Title
+st.title('Diabetes Prediction')
+
+# Split Columns
+col1, col2 = st.columns(2)
+
+with col1 :
+  Pregnancies = st.text_input('Enter the Pregnancies value')
+
+with col2 :
+  Glucose = st.text_input('Enter the Glucose value')
+  
+with col1 :
+  Blood_Pressure = st.text_input('Enter the Blood Pressure value')
+
+with col2 :
+  Skin_Thickness = st.text_input('Enter the Skin Thickness value')
+
+with col1 :
+  Insulin = st.text_input('Enter the Insulin value')
+
+with col2 :
+  BMI = st.text_input('Enter the BMI value')
+
+with col1 :
+  Diabetes_Pedigree_Function = st.text_input('Enter the Diabetes Pedigree Function value')
+
+with col2 :
+  Age = st.text_input('Enter the Age value')
+  
+# Prediction
+diabetes_diagnosis = ''
+
+if st.button('Diabetes Prediction Test'):
+  diabetes_prediction = model_diabetes.predict([[Pregnancies,Glucose,BloodPressure,SkinThickness,Insulin,BMI,DiabetesPedigreeFunction,Age,Outcome]])
+  
+  if(diabetes_prediction[0]==0):
+    diabetes_diagnosis = 'The patient does not have diabetes'
+  else :
+    diabetes_diagnosis = 'The patient has diabetes'
+
+st.success(diabetes_diagnosis)
+
